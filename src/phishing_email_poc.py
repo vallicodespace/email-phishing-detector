@@ -18,7 +18,18 @@ from typing import Optional, Dict, Any, Iterable, List, Tuple
 
 import numpy as np
 import pandas as pd
-import joblib
+
+# joblib is convenient but not guaranteed to be preinstalled in restricted environments.
+# Fall back to stdlib pickle for saving models.
+try:
+    import joblib  # type: ignore
+
+    _JOBLIB_AVAILABLE = True
+except Exception:
+    joblib = None  # type: ignore
+    _JOBLIB_AVAILABLE = False
+
+import pickle
 
 from sklearn.model_selection import train_test_split
 from sklearn.pipeline import Pipeline
@@ -308,6 +319,11 @@ def main() -> None:
     ap.add_argument("--test-size", type=float, default=0.2)
     ap.add_argument("--random-state", type=int, default=42)
     ap.add_argument("--artifacts", default="artifacts", help="Folder to save trained model pipelines.")
+    ap.add_argument(
+        "--no-save",
+        action="store_true",
+        help="Skip saving trained models (useful in restricted/ephemeral environments like Colab).",
+    )
     ap.add_argument("--no-nltk", action="store_true", help="Disable NLTK stopwords/lemmatization.")
     ap.add_argument("--verbose", action="store_true", help="Enable debug logging.")
     args = ap.parse_args()
@@ -364,7 +380,8 @@ def main() -> None:
                 (
                     "model",
                     RandomForestClassifier(
-                        n_estimators=500,
+                        # Keep this moderate for Colab/runtime constraints.
+                        n_estimators=300,
                         random_state=args.random_state,
                         n_jobs=-1,
                         class_weight="balanced_subsample",
@@ -374,7 +391,8 @@ def main() -> None:
         ),
     }
 
-    os.makedirs(args.artifacts, exist_ok=True)
+    if not args.no_save:
+        os.makedirs(args.artifacts, exist_ok=True)
 
     scores: List[Tuple[str, float]] = []
 
@@ -385,12 +403,22 @@ def main() -> None:
         metrics = evaluate_model(pipe, X_test, y_test)
         scores.append((name, metrics.f1))
 
-        out_path = os.path.join(args.artifacts, f"{name}.joblib")
-        joblib.dump(pipe, out_path)
+        out_path = None
+        if not args.no_save:
+            ext = "joblib" if _JOBLIB_AVAILABLE else "pkl"
+            out_path = os.path.join(args.artifacts, f"{name}.{ext}")
+            if _JOBLIB_AVAILABLE:
+                joblib.dump(pipe, out_path)  # type: ignore[union-attr]
+            else:
+                with open(out_path, "wb") as f:
+                    pickle.dump(pipe, f)
 
         print("\n" + "=" * 80)
         print(f"MODEL: {name}")
-        print(f"SAVED: {out_path}")
+        if out_path:
+            print(f"SAVED: {out_path}")
+        else:
+            print("SAVED: (skipped --no-save)")
         print(
             f"accuracy={metrics.accuracy:.4f} precision={metrics.precision:.4f} "
             f"recall={metrics.recall:.4f} f1={metrics.f1:.4f} roc_auc={metrics.roc_auc}"

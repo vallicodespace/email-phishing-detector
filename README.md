@@ -3,6 +3,20 @@
 Phishing email detection PoC based on `PoC_Doc.csv`.
 
 ## Quick start
+
+### Google Colab (recommended)
+- Upload the CSV to Colab, or mount Google Drive.
+- This script runs with Colab's default Python environment.
+- Optional features:
+  - NLTK-based stopword removal + lemmatization (best-effort; can be disabled with `--no-nltk`).
+  - Model saving via `joblib` when available; otherwise it falls back to Python `pickle`.
+
+Run (CSV uploaded to the session):
+```bash
+python src/phishing_email_poc.py --csv /content/<file>.csv --target <label-col> --text-col <text-col> --no-save
+```
+
+### Local
 1) Install dependencies:
 ```bash
 pip install -r requirements.txt
@@ -75,14 +89,9 @@ python src/phishing_email_poc.py \
 
 ## Output
 - Metrics are printed for each model (Accuracy/Precision/Recall/F1, plus ROC-AUC when available).
-- Models are saved to `artifacts/` as:
-  - `artifacts/logistic_regression.joblib`
-  - `artifacts/svm_linear.joblib`
-  - `artifacts/random_forest.joblib`
+- Models are saved to `artifacts/` unless you pass `--no-save`.
+  - If `joblib` is available: `artifacts/<model>.joblib`
+  - Otherwise: `artifacts/<model>.pkl`
 
 ## Notes
-- The script optionally uses NLTK for stopword removal and lemmatization. If NLTK resources cannot be downloaded (offline), it automatically falls back to basic regex cleaning.
-- Random Forest requires dense arrays; the script densifies TF-IDF features for Random Forest. For very large datasets, Random Forest may be memory-heavy.
-
-## Contributing
-Keep changes small and focused. If you modify behavior, include a short note in the PR/commit message describing what changed and how it was validated.
+- If NLTK is not available (or resources cannot be downloaded), the script automatically falls back to basic regex cleaning. You can also force this with `--no-nltk`.
