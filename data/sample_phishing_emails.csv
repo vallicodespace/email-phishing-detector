@@ -1,0 +1,9 @@
+label,text,from
+1,URGENT: Verify your account immediately. Click https://secure-login.example.com to confirm your password.,Security Team <no-reply@secure-example.com>
+0,"Hi team, attached is the agenda for tomorrow's meeting. Please review before 10am.",Alex Johnson <alex.johnson@company.com>
+1,Your mailbox is almost full. Update your account now to avoid suspension: www.mail-verify.example/login,IT Support <support@it-helpdesk-mail.com>
+0,Invoice #49281 has been paid. Thank you for your business.,Billing <billing@vendor.com>
+1,We've detected unusual activity. Verify your identity to restore access: https://account-check.example/verify,Account Services <alert@accounts-security.com>
+0,Can we reschedule our call to Friday afternoon?,Priya <priya@partner.org>
+1,Payment failed. Please update your bank details urgently at http://update-payments.example.com,Payments <payments@pay-secure.example>
+0,Welcome to the newsletter! You can unsubscribe anytime.,News <newsletter@updates.example>
