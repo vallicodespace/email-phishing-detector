@@ -1,0 +1,103 @@
+Shape: (189, 13)
+
+Label distribution:
+label
+0    173
+1     16
+Name: count, dtype: int64
+
+🔧 Training models...
+
+============================================================
+Logistic Regression
+Accuracy: 0.921
+F1: 0.0
+============================================================
+SVM
+Accuracy: 0.921
+F1: 0.0
+/usr/local/lib/python3.12/dist-packages/sklearn/svm/_base.py:1249: ConvergenceWarning: Liblinear failed to converge, increase the number of iterations.
+  warnings.warn(
+============================================================
+Random Forest
+Accuracy: 0.921
+F1: 0.0
+
+================ EMAIL RESULTS ================
+
+----------------------------------------------------------------------
+📩 EMAIL: Are you available ?
+No calls text only 9513072XXX ...
+🤖 Logistic Regression: LEGITIMATE
+🤖 SVM: LEGITIMATE
+🤖 Random Forest: LEGITIMATE
+🚨 RISK LEVEL: LOW RISK
+----------------------------------------------------------------------
+📩 EMAIL: I'm in a meeting and need help getting some Amazon Gift Cards ...
+🤖 Logistic Regression: LEGITIMATE
+🤖 SVM: LEGITIMATE
+🤖 Random Forest: LEGITIMATE
+🚨 RISK LEVEL: LOW RISK
+----------------------------------------------------------------------
+📩 EMAIL: Hello RECIPIENT
+
+I am urgently seeking for a Clerical/Administrative Assistant to 
+work for me on campus at their own fr ...
+🤖 Logistic Regression: LEGITIMATE
+🤖 SVM: LEGITIMATE
+🤖 Random Forest: LEGITIMATE
+🚨 RISK LEVEL: LOW RISK
+----------------------------------------------------------------------
+📩 EMAIL: Are you around? I need to pay a vendor with the blucard. ...
+🤖 Logistic Regression: LEGITIMATE
+🤖 SVM: LEGITIMATE
+🤖 Random Forest: LEGITIMATE
+🚨 RISK LEVEL: LOW RISK
+----------------------------------------------------------------------
+📩 EMAIL: I'm in a meeting and need help getting some Amazon Gift Cards ...
+🤖 Logistic Regression: LEGITIMATE
+🤖 SVM: LEGITIMATE
+🤖 Random Forest: LEGITIMATE
+🚨 RISK LEVEL: LOW RISK
+----------------------------------------------------------------------
+📩 EMAIL: XXX has invited you to view the following document: ...
+🤖 Logistic Regression: LEGITIMATE
+🤖 SVM: LEGITIMATE
+🤖 Random Forest: LEGITIMATE
+🚨 RISK LEVEL: LOW RISK
+----------------------------------------------------------------------
+📩 EMAIL: Dear XXXXX@berkeley.edu(link sends e-mail)
+
+An information document has been sent to you by the Human Resources Departme ...
+🤖 Logistic Regression: LEGITIMATE
+🤖 SVM: LEGITIMATE
+🤖 Random Forest: LEGITIMATE
+🚨 RISK LEVEL: LOW RISK
+----------------------------------------------------------------------
+📩 EMAIL: Dear Student,
+
+Your access to your library account is expiring soon due to inactivity. To
+continue to have access to the ...
+🤖 Logistic Regression: PHISHING
+🤖 SVM: PHISHING
+🤖 Random Forest: PHISHING
+🚨 RISK LEVEL: HIGH RISK
+----------------------------------------------------------------------
+📩 EMAIL: Hello,
+ 
+You just received a file through Dropbox Share Application.
+Please click below and log in to view file.
+ 
+View  ...
+🤖 Logistic Regression: LEGITIMATE
+🤖 SVM: LEGITIMATE
+🤖 Random Forest: LEGITIMATE
+🚨 RISK LEVEL: LOW RISK
+----------------------------------------------------------------------
+📩 EMAIL: Dear User,
+
+This message is to inform you that your access to bCourses will soon expire. You will have to login to your  ...
+🤖 Logistic Regression: LEGITIMATE
+🤖 SVM: LEGITIMATE
+🤖 Random Forest: LEGITIMATE
+🚨 RISK LEVEL: LOW RISK
